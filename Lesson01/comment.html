@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .reply-form {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="comment">
+        <p>Comment 1</p>
+        <button class="reply-button">Reply</button>
+        <form class="reply-form">
+            <textarea placeholder="Write answer"></textarea>
+            <button class="submit-button">submit</button>
+        </form>
+    </div>
+
+    <div class="comment">
+        <p>Comment 2</p>
+        <button class="reply-button">Reply</button>
+        <form class="reply-form">
+            <textarea placeholder="Write answer"></textarea>
+            <button class="submit-button">submit</button>
+        </form>
+    </div>
+    <div class="comment">
+        <p>Comment 3</p>
+        <button class="reply-button">Reply</button>
+        <form class="reply-form">
+            <textarea placeholder="Write answer"></textarea>
+            <button class="submit-button">submit</button>
+        </form>
+    </div>
+    <script>
+        const replyButtons = document.querySelectorAll('.reply-button');
+        replyButtons.forEach(button => {
+            button.addEventListener('click', function (e) {
+                const comment = button.closest('.comment');
+                const replyForm = comment.querySelector('.reply-form');
+
+                const allReplyForms = document.querySelectorAll('.reply-form');
+                allReplyForms.forEach(form => {
+                    if (form !== replyForm) {
+                        form.style.display = 'none';
+                    }
+                });
+
+                replyForm.style.display = 'block';
+            });
+        });
+    </script>
+
+</body>
+
+</html>

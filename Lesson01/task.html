@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul id="task-list">
+        <li>Task 1<button class="delete-button">Delete</button><button class="clone-button">Clone</button></li>
+        <li>Task 2<button class="delete-button">Delete</button><button class="clone-button">Clone</button></li>
+        <li>Task 3<button class="delete-button">Delete</button><button class="clone-button">Clone</button></li>
+    </ul>
+
+    <button class="clear-button">Back to default</button>
+
+    <script>
+        const taskList = document.getElementById("task-list");
+        const clear = document.querySelector('.clear-button');
+
+        taskList.addEventListener('click', (event) => {
+            if(event.target.classList.contains('delete-button')) {
+                const taskItem = event.target.closest('li');
+                taskItem.remove();
+
+                localStorage.setItem('taskList', taskList.innerHTML);
+            }
+
+            if (event.target.classList.contains('clone-button')) {
+                const taskItem = event.target.closest('li');
+                const cloneTaskItem = taskItem.cloneNode(true);
+                taskItem.after(cloneTaskItem);
+
+                localStorage.setItem('taskList', taskList.innerHTML);
+            }
+        });
+
+        if (localStorage.getItem('taskList')) {
+            taskList.innerHTML = localStorage.getItem('taskList');
+        }
+
+        clear.addEventListener('click', function (e) {
+            localStorage.clear();
+            window.location.reload();
+        });
+    </script>
+</body>
+</html>
