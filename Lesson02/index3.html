@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .btn{
+            widows: 200px;
+            height: 50px;
+            background-color: gray;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            /* transform: translate(-50%, -50%); */
+            transition: all 0.5s ease;
+        }
+    </style>
+</head>
+<body>
+    <button class="btn">Оставить негативный отзыв</button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function (e) {
+            const btn = document.querySelector('.btn');
+            let isMoving = false;
+
+            btn.addEventListener('mouseover', function (e) {
+                if(!isMoving) {
+                    let randomTop = Math.random() * window.innerHeight;
+                    if (randomTop + 50 > window.innerHeight) randomTop = randomTop - 50;
+                    let randomLeft = Math.random() * window.innerWidth;
+                    if (randomLeft + 200 > window.innerWidth) randomLeft = randomLeft - 200;
+
+                    btn.style.top = randomTop + 'px';
+                    btn.style.left = randomLeft + 'px';
+                }
+            });
+
+            btn.addEventListener('mousedown', function (e) {
+                isMoving = true;
+                btn.style.background = 'blue';
+            });
+
+            btn.addEventListener('mouseup', function (e) {
+                isMoving = false;
+                btn.style.background = 'gray';
+            });
+        });
+    </script>
+</body>
+</html>

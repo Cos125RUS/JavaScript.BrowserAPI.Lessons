@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            widows: 300px;
+            padding: 20px;
+            background-color: rgb(197, 193, 193);
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <button class="open-modal-button">Open modal window</button>
+
+    <div class="modal">
+        <h2>Modal window</h2>
+        <p>Click without modal window to close</p>
+    </div>
+
+    <script>
+        const modalEl = document.querySelector('.modal');
+        const openBtn = document.querySelector('.open-modal-button');
+
+        openBtn.addEventListener('click', function (e) {
+            modalEl.style.display = 'block';
+        });
+
+        document.addEventListener('mousedown', function (e) {
+            if(!modalEl.contains(e.target) && e.target !== openBtn){
+                modalEl.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
