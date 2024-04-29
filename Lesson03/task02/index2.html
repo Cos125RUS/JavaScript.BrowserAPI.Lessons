@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form name="myForm">
+        <input type="text" name="text" value="my text">
+        <input type="number" name="number" value="123">
+        <input type="submit" value="submit">
+    </form>
+
+    <script>
+        'use strict';
+
+        const form = document.forms.myForm;
+        form.onsubmit = async (e) => {
+            e.preventDefault();
+
+            let response = await fetch('https://fakestoreapi.com/products', {
+                method: 'POST',
+                body: new FormData(form)
+            });
+
+            let result = await response.json();
+            console.log(result);
+        }
+    </script>
+</body>
+</html>

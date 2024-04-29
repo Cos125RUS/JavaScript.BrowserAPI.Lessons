@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form name="form">
+        <input type="email" name="email" id="email">
+    </form>
+
+    <script>
+        const emailEl = document.querySelector('#email');
+        emailEl.oncut = emailEl.onpaste = emailEl.oncopy = (e) => {
+            console.log(e.type + '-' + e.clipboardData.getData('text/plain'));
+        }
+    </script>
+</body>
+
+</html>

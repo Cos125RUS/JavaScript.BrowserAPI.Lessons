@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>user info</h1>
+    <label for="sort-select">Sort</label>
+    <select id="sort-select">
+        <option value="name">Name</option>
+        <option value="age">Age</option>
+    </select>
+    <div id="user-list"></div>
+
+    <script>
+        const userListEl = document.querySelector('#user-list');
+        const sortSelect = document.querySelector('#sort-select');
+
+        fetch('https://randomuser.me/api/?results=5')
+            .then(response => response.json())
+            .then(data => {
+                let users = data.results;
+                renderUserList(users);
+                
+                sortSelect.addEventListener('change', function (e) {
+                    const selectOption = sortSelect.value;
+                    users = sortUsers(users, selectOption);
+                    
+                    renderUserList(users);
+                });
+            })
+            .catch(console.error);
+                
+        const renderUserList = (users) => {
+            userListEl.innerHTML = '';
+
+            users.forEach(user => {
+                const userEl = createUserElement(user);
+                userListEl.appendChild(userEl);
+            });
+        }
+
+        const createUserElement = (user) => {
+            const userContainer = document.createElement('div');
+            userContainer.classList.add('user');
+
+            const userName = document.createElement('p');
+            userName.textContent = `User: ${user.name.first} ${user.name.last}`;
+            userContainer.appendChild(userName);
+
+            const userAge = document.createElement('p');
+            userAge.textContent = `Age: ${user.dob.age}`;
+            userContainer.appendChild(userAge);
+
+            return userContainer;
+        }
+
+        const sortUsers = (users, sortBy) => {
+            return users.sort((a, b) => {
+                if (sortBy === 'name') {
+                    return a.name.first.localeCompare(b.name.first);
+                } else if (sortBy === 'age') {
+                    return a.dob.age - b.dob.age;
+                }
+            })
+        }
+    </script>
+</body>
+
+</html>

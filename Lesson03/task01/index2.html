@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form name="superForm">
+        <select name="selectForm" multiple>
+            <option value="GeekBrains">GeekBrains</option>
+            <option value="SkillBox">SkillBox</option>
+            <option value="SkillFactory">SkillFactory</option>
+        </select>
+    </form>
+    
+    <script>
+        const select = document.forms.superForm.selectForm;
+        select.value = 'SkillFactory';
+        select.selectedIndex = 1;
+        select.options[0].selected = true;
+
+        const selected = Array.from(select.options).filter(option => option.selected).map(option => option.value);
+        console.log(selected);
+    </script>
+</body>
+</html>
